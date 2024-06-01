@@ -5,6 +5,7 @@ import { UserModel } from 'src/_core/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import { ReqLocalRegister } from './dto/req-local-register.dto';
+import { ResRegister } from './dto/res-register.dto';
 
 @Injectable()
 export class RegisterService {
@@ -14,7 +15,9 @@ export class RegisterService {
     private readonly usersService: UsersService,
     private readonly authService: AuthService,
   ) {}
-  async localRegister(reqLocalRegister: ReqLocalRegister): Promise<string> {
+  async localRegister(
+    reqLocalRegister: ReqLocalRegister,
+  ): Promise<ResRegister> {
     const { username, password } = reqLocalRegister;
     const existUser = await this.usersService.getUser(username);
     if (existUser) {
@@ -29,6 +32,6 @@ export class RegisterService {
     });
     const accessToken = this.authService.signToken(user.id);
 
-    return accessToken;
+    return { accessToken };
   }
 }
