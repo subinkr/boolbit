@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserModel } from './_core/entities/user.entity';
 import { CommonModule } from './_common/_common.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CommonModule } from './_common/_common.module';
       synchronize: true,
     }),
     CommonModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
