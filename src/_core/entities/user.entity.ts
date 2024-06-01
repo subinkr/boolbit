@@ -21,9 +21,30 @@ export class UserModel extends BaseModel {
   @Column({ nullable: true })
   image?: string;
 
+  // title;
+
+  // strength;
+  // agility;
+  // stamina;
+  // intelligence;
+  // wisdom;
+
+  // titles;
   // followUsers;
   // followingUsers;
+
+  // achievements;
+  // boards;
+  // tags;
+  // comments;
+  // likes;
+
+  // activities;
+  // skills;
+  // lectures;
+
+  // logs;
+
   // chats;
   // rooms;
-  // boards;
 }
