@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModel } from './_core/entities/user.entity';
 import { CommonModule } from './_common/_common.module';
 import { UsersModule } from './users/users.module';
+import { RegisterModule } from './register/register.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { UsersModule } from './users/users.module';
     }),
     CommonModule,
     UsersModule,
+    RegisterModule,
   ],
   controllers: [AppController],
   providers: [AppService],
