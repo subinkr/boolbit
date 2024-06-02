@@ -8,7 +8,10 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Boolbit')
     .setDescription('Life is game')
-    .setVersion('1.0.0')
+    .setVersion('1.1.0')
+    .addTag('Login')
+    .addTag('Register')
+    .addTag('Users')
     .addBearerAuth()
     .build();
 
