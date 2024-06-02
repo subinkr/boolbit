@@ -9,6 +9,7 @@ async function bootstrap() {
     .setTitle('Boolbit')
     .setDescription('Life is game')
     .setVersion('1.0.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
