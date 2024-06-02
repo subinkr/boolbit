@@ -11,7 +11,7 @@ export class AuthService {
       { id },
       {
         secret: process.env.JWT_SECRET || 'test',
-        expiresIn: parseInt(process.env.JWT_EXPIRED) || 1234,
+        // expiresIn: parseInt(process.env.JWT_EXPIRED) || 1234,
       },
     );
 
