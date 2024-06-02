@@ -19,6 +19,13 @@ export class UsersController {
   @ApiOkResponse({ type: ResGetUser })
   @ApiNotFoundResponse(notFound('User not found'))
   async getUser(@Param('id', ParseIntPipe) id: number): Promise<ResGetUser> {
-    return this.usersService.getUser(id);
+    const result = await this.usersService.getUser(id);
+
+    return {
+      id: result.id,
+      username: result.username,
+      nickname: result.nickname,
+      image: result.image,
+    };
   }
 }

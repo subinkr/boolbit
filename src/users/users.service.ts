@@ -11,7 +11,7 @@ export class UsersService {
     private readonly userRepository: Repository<UserModel>,
   ) {}
 
-  async getUser(data: number | string): Promise<ResGetUser> {
+  async getUser(data: number | string): Promise<UserModel> {
     const dataIsNumber = typeof data === 'number';
 
     const user = await this.userRepository.findOne({
@@ -25,11 +25,6 @@ export class UsersService {
       throw new NotFoundException('User not found');
     }
 
-    return {
-      id: user.id,
-      username: user.username,
-      nickname: user.nickname,
-      image: user.image,
-    };
+    return user;
   }
 }

@@ -8,6 +8,6 @@ export class ResGetUser {
   username: string;
   @ApiProperty({ example: MockUserModel.defaultUser.nickname })
   nickname: string;
-  @ApiProperty({ example: MockUserModel.defaultUser.id, required: false })
+  @ApiProperty({ example: MockUserModel.defaultUser.image, required: false })
   image: string;
 }
