@@ -2,6 +2,7 @@ import { Column, Entity } from 'typeorm';
 import { BaseModel } from './base.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MockUserModel } from 'src/_mock/entities/user.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -9,8 +10,8 @@ export class UserModel extends BaseModel {
   @Column()
   username: string;
 
-  @ApiProperty({ example: MockUserModel.defaultUser.password, required: false })
   @Column()
+  @Exclude({ toPlainOnly: true })
   password: string;
 
   @ApiProperty({ example: MockUserModel.defaultUser.nickname, required: false })
