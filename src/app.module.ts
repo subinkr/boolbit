@@ -7,6 +7,7 @@ import { UserModel } from './_core/entities/user.entity';
 import { CommonModule } from './_common/_common.module';
 import { UsersModule } from './users/users.module';
 import { RegisterModule } from './register/register.module';
+import { LoginModule } from './login/login.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { RegisterModule } from './register/register.module';
     CommonModule,
     UsersModule,
     RegisterModule,
+    LoginModule,
   ],
   controllers: [AppController],
   providers: [AppService],
