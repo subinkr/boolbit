@@ -13,7 +13,7 @@ export class MockUserModel {
     image: null,
   };
 
-  static users: UserModel[] = [];
+  static users: UserModel[] = [this.defaultUser];
 
   static accessToken: string =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWF0IjoxNzAzNDA5OTA0LCJleHAiOjFlKzUwfQ.BBf7DDbpw-mopP6iPvu8pxc7PoTjCbt5p7h3RPWT_Cw';
@@ -32,7 +32,7 @@ export class MockUserModel {
     return MockUserModel.users;
   }
 
-  exist({ where: { id, username } }) {
+  exists({ where: { id, username } }) {
     const [user] = id
       ? MockUserModel.users.filter((user) => user.id === id)
       : MockUserModel.users.filter((user) => user.username === username);
