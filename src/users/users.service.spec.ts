@@ -17,11 +17,11 @@ describe('UsersService', () => {
   });
 
   describe('Get user', () => {
-    it('RUN', async () => {
+    it('RUN | getUser(id)', async () => {
       await service.getUser(defaultUser.id);
     });
 
-    it('RUN', async () => {
+    it('RUN | getUser(username)', async () => {
       await service.getUser(defaultUser.username);
     });
 

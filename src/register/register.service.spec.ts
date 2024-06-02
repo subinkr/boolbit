@@ -39,7 +39,7 @@ describe('RegisterService', () => {
   });
 
   describe('Withdraw registration', () => {
-    it('RUN', async () => {
+    it('RUN | withdrawRegister(id)', async () => {
       await service.withdrawRegister(defaultUser.id);
     });
   });
