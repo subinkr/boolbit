@@ -6,8 +6,8 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { ResGetUser } from './dto/res-get-user.dto';
 import { notFound } from 'src/_core/error/not-found';
+import { ResGetUserProfile } from './dto/res-get-user-profile.dto';
 
 @Controller('users')
 @ApiTags('Users')
@@ -16,16 +16,11 @@ export class UsersController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get user by ID' })
-  @ApiOkResponse({ type: ResGetUser })
+  @ApiOkResponse({ type: ResGetUserProfile })
   @ApiNotFoundResponse(notFound('User not found'))
-  async getUser(@Param('id', ParseIntPipe) id: number): Promise<ResGetUser> {
-    const result = await this.usersService.getUser(id);
-
-    return {
-      id: result.id,
-      username: result.username,
-      nickname: result.nickname,
-      image: result.image,
-    };
+  async getUserProfile(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<ResGetUserProfile> {
+    return this.usersService.getUserProfile(id);
   }
 }

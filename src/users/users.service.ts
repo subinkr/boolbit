@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserModel } from 'src/_core/entities/user.entity';
 import { Repository } from 'typeorm';
-import { ResGetUser } from './dto/res-get-user.dto';
+import { ResGetUserProfile } from './dto/res-get-user-profile.dto';
 
 @Injectable()
 export class UsersService {
@@ -26,5 +26,16 @@ export class UsersService {
     }
 
     return user;
+  }
+
+  async getUserProfile(data: number | string): Promise<ResGetUserProfile> {
+    const result = await this.getUser(data);
+
+    return {
+      id: result.id,
+      username: result.username,
+      nickname: result.nickname,
+      image: result.image,
+    };
   }
 }

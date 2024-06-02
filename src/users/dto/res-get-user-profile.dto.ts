@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { MockUserModel } from 'src/_mock/entities/user.entity';
 
-export class ResGetUser {
+export class ResGetUserProfile {
   @ApiProperty({ example: MockUserModel.defaultUser.id })
   id: number;
   @ApiProperty({ example: MockUserModel.defaultUser.username })
