@@ -15,7 +15,7 @@ export class UserModel extends BaseModel {
   password: string;
 
   @ApiProperty({ example: MockUserModel.defaultUser.nickname, required: false })
-  @Column()
+  @Column({ default: 'Anonymous' })
   nickname: string;
 
   @ApiProperty({ example: MockUserModel.defaultUser.image, required: false })
