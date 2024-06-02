@@ -20,7 +20,7 @@ export class ReqLocalRegister {
   @IsString()
   nickname: string;
 
-  @ApiProperty({ example: MockUserModel.defaultUser.nickname, required: false })
+  @ApiProperty({ example: MockUserModel.defaultUser.image, required: false })
   @IsString()
   image?: string;
 }
