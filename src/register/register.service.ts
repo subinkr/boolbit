@@ -37,6 +37,9 @@ export class RegisterService {
       password: hashPassword,
     });
     user.detail = Promise.resolve(detail);
+    user.activityList = Promise.resolve([]);
+    user.skillList = Promise.resolve([]);
+    user.lectureList = Promise.resolve([]);
     this.userRepository.save(user);
 
     const accessToken = this.authService.signToken(user.id);

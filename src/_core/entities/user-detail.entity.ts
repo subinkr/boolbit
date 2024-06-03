@@ -80,12 +80,6 @@ export class UserDetailModel extends BaseModel {
   followingUsers: number;
 
   @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.activities,
-  })
-  @Column({ default: 0 })
-  activities: number;
-
-  @ApiProperty({
     example: MockUserDetailModel.defaultDetail.skills,
   })
   @Column({ default: 0 })
