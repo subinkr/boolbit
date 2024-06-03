@@ -13,6 +13,8 @@ import { Exclude } from 'class-transformer';
 import { TitleModel } from './title.entity';
 import { UserDetailModel } from './user-detail.entity';
 import { ActivityModel } from './activity.entity';
+import { SkillModel } from './skill.entity';
+import { LectureModel } from './lecture.entity';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -39,31 +41,41 @@ export class UserModel extends BaseModel {
   @Column({ nullable: true })
   titleName?: string;
 
-  @ApiProperty({ example: [], required: false })
+  @ApiProperty({ example: [] })
   @ManyToMany(() => TitleModel, (title) => title.userList, {
     onDelete: 'SET NULL',
   })
   titleList: Promise<TitleModel[]>;
 
-  @ApiProperty({ example: [], required: false })
+  @ApiProperty({ example: [] })
   @ManyToMany(() => UserModel, (user) => user.followingUserList, {
     onDelete: 'CASCADE',
   })
   followerUserList: Promise<UserModel[]>;
 
-  @ApiProperty({ example: [], required: false })
+  @ApiProperty({ example: [] })
   @ManyToMany(() => UserModel, (user) => user.followerUserList)
   @JoinTable({ name: 'follow_model' })
   followingUserList: Promise<UserModel[]>;
 
-  @ApiProperty({ example: [], required: false })
-  @ManyToMany(() => UserModel, (user) => user.followerUserList, {
+  @ApiProperty({ example: [] })
+  @ManyToMany(() => ActivityModel, (activity) => activity.userList, {
     onDelete: 'SET NULL',
   })
   activityList: Promise<ActivityModel[]>;
 
-  // skillList;
-  // lectureList;
+  @ApiProperty({ example: [] })
+  @ManyToMany(() => SkillModel, (skill) => skill.userList, {
+    onDelete: 'SET NULL',
+  })
+  skillList: Promise<SkillModel[]>;
+
+  @ApiProperty({ example: [] })
+  @ManyToMany(() => LectureModel, (lecture) => lecture.userList, {
+    onDelete: 'SET NULL',
+  })
+  lectureList: Promise<LectureModel[]>;
+
   // chatList;
   // roomList;
   // notificationList;

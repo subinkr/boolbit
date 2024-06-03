@@ -12,6 +12,8 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TitleModel } from './_core/entities/title.entity';
 import { UserDetailModel } from './_core/entities/user-detail.entity';
 import { ActivityModel } from './_core/entities/activity.entity';
+import { SkillModel } from './_core/entities/skill.entity';
+import { LectureModel } from './_core/entities/lecture.entity';
 
 @Module({
   imports: [
@@ -26,7 +28,14 @@ import { ActivityModel } from './_core/entities/activity.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [UserModel, UserDetailModel, ActivityModel, TitleModel],
+      entities: [
+        UserModel,
+        UserDetailModel,
+        ActivityModel,
+        SkillModel,
+        LectureModel,
+        TitleModel,
+      ],
       synchronize: true,
     }),
     CommonModule,

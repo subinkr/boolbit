@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseModel } from './base.entity';
-import { JoinTable, ManyToMany } from 'typeorm';
+import { Entity, JoinTable, ManyToMany } from 'typeorm';
 import { UserModel } from './user.entity';
 import { MockActivityModel } from 'src/_mock/entities/activity.entity';
 
+@Entity()
 export class ActivityModel extends BaseModel {
   @ApiProperty({ example: MockActivityModel.defaultActivity.name })
   name: string;
