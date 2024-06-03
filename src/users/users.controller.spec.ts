@@ -19,11 +19,11 @@ describe('UsersController', () => {
     service = module.get<UsersService>(UsersService);
   });
 
-  describe('Get user', () => {
-    it('USE | getUser', async () => {
-      service.getUser = jest.fn().mockReturnValue(defaultUser);
-      await controller.getUser(defaultUser.id);
-      expect(service.getUser).toHaveBeenCalled();
+  describe('Get user profile', () => {
+    it('USE | getUserProfile', async () => {
+      service.getUserProfile = jest.fn().mockReturnValue(defaultUser);
+      await controller.getUserProfile(defaultUser.id);
+      expect(service.getUserProfile).toHaveBeenCalled();
     });
   });
 });

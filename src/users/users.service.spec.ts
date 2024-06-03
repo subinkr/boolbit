@@ -30,4 +30,12 @@ describe('UsersService', () => {
       await expect(result).rejects.toThrow(NotFoundException);
     });
   });
+
+  describe('Get user profile', () => {
+    it('USE | getUser', async () => {
+      service.getUser = jest.fn().mockReturnValue(defaultUser);
+      await service.getUserProfile(defaultUser.id);
+      expect(service.getUser).toHaveBeenCalled();
+    });
+  });
 });
