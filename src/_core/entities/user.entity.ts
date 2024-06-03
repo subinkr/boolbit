@@ -1,8 +1,9 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
 import { BaseModel } from './base.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MockUserModel } from 'src/_mock/entities/user.entity';
 import { Exclude } from 'class-transformer';
+import { TitleModel } from './title.entity';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -22,30 +23,55 @@ export class UserModel extends BaseModel {
   @Column({ nullable: true })
   image?: string;
 
-  // title;
+  @ApiProperty({
+    example: MockUserModel.defaultUser.titleName,
+    required: false,
+  })
+  @Column({ nullable: true })
+  titleName?: string;
 
-  // strength;
-  // agility;
-  // stamina;
-  // intelligence;
-  // wisdom;
+  @ApiProperty({
+    example: MockUserModel.defaultUser.titleColor,
+    required: false,
+  })
+  @Column({ nullable: true })
+  titleColor?: string;
 
-  // titles;
+  @ApiProperty({
+    example: MockUserModel.defaultUser.titleList,
+    required: false,
+  })
+  @ManyToMany(() => TitleModel, (title) => title.userList)
+  titleList: Promise<TitleModel[]>;
+
+  // strengthLevel;
+  // agilityLevel;
+  // staminaLevel;
+  // intellectLevel;
+  // wisdomLevel;
+  // strengthExp;
+  // agilityExp;
+  // staminaExp;
+  // intellectExp;
+  // wisdomExp;
+
+  // followUserList;
+  // followingUserList;
   // followUsers;
   // followingUsers;
 
-  // achievements;
-  // boards;
-  // tags;
-  // comments;
-  // likes;
+  // achievementList;
+  // logList;
 
-  // activities;
+  // activityList;
+  // skillList;
+  // lectureList;
   // skills;
   // lectures;
 
-  // logs;
+  // chatList;
+  // roomList;
 
-  // chats;
-  // rooms;
+  // notificationList;
+  // notifications;
 }

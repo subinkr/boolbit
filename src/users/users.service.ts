@@ -36,6 +36,8 @@ export class UsersService {
       username: result.username,
       nickname: result.nickname,
       image: result.image,
+      titleName: result.titleName,
+      titleColor: result.titleColor,
     };
   }
 }
