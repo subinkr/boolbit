@@ -1,5 +1,6 @@
 import { UserModel } from 'src/_core/entities/user.entity';
 import { MockUserDetailModel } from './user-detail.entity';
+import { MockActivityModel } from './activity.entity';
 
 export class MockUserModel {
   static defaultUser: UserModel = {
@@ -18,6 +19,8 @@ export class MockUserModel {
 
     followerUserList: Promise.resolve([]),
     followingUserList: Promise.resolve([]),
+
+    activityList: Promise.resolve([MockActivityModel.defaultActivity]),
 
     detail: Promise.resolve(MockUserDetailModel.defaultDetail),
   };

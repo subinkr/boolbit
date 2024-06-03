@@ -7,6 +7,7 @@ import { ReqLocalRegister } from './dto/req-local-register.dto';
 import { ResRegister } from './dto/res-register.dto';
 import { ResWithdrawRegister } from './dto/res-withdraw-register.dto';
 import { UserDetailModel } from 'src/_core/entities/user-detail.entity';
+import { ActivityModel } from 'src/_core/entities/activity.entity';
 
 @Injectable()
 export class RegisterService {

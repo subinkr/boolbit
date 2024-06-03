@@ -56,7 +56,12 @@ export class UserModel extends BaseModel {
   @JoinTable({ name: 'follow_model' })
   followingUserList: Promise<UserModel[]>;
 
-  // activityList;
+  @ApiProperty({ example: [], required: false })
+  @ManyToMany(() => UserModel, (user) => user.followerUserList, {
+    onDelete: 'SET NULL',
+  })
+  activityList: Promise<ActivityModel[]>;
+
   // skillList;
   // lectureList;
   // chatList;

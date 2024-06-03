@@ -25,6 +25,7 @@ export class MockUserDetailModel {
 
     followUsers: 0,
     followingUsers: 0,
+    activities: 0,
     skills: 0,
     lectures: 0,
   };

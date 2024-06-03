@@ -56,6 +56,8 @@ export class UsersService {
       followingUsers: detail.followingUsers,
       skills: detail.skills,
       lectures: detail.lectures,
+
+      activityList: detail.activities ? await user.activityList : [],
     };
   }
 }
