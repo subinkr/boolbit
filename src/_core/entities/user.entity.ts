@@ -56,14 +56,16 @@ export class UserModel extends BaseModel {
   @JoinTable({ name: 'follow_model' })
   followingUserList: Promise<UserModel[]>;
 
-  // achievementList;
-  // logList;
   // activityList;
   // skillList;
   // lectureList;
   // chatList;
   // roomList;
   // notificationList;
+
+  // boardList;
+  // commentList;
+  // likeList;
 
   @ApiProperty({ example: MockUserModel.defaultUser.detail })
   @OneToOne(() => UserDetailModel, (detail) => detail.user, {
