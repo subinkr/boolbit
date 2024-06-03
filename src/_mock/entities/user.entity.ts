@@ -15,6 +15,10 @@ export class MockUserModel {
 
     titleName: null,
     titleList: Promise.resolve([]),
+
+    followerUserList: Promise.resolve([]),
+    followingUserList: Promise.resolve([]),
+
     detail: Promise.resolve(MockUserDetailModel.defaultDetail),
   };
 

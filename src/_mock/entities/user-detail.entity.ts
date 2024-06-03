@@ -7,21 +7,7 @@ export class MockUserDetailModel {
     updatedAt: new Date(1),
     deletedAt: null,
 
-    user: Promise.resolve({
-      id: 1,
-      createdAt: new Date(1),
-      updatedAt: new Date(1),
-      deletedAt: null,
-
-      username: 'username',
-      password: '$2b$10$qNKbTu/9urzFoJ1QrzoaAej7xmAq.a7Bg3tAhKdDE0p.RuVwfppO2',
-      nickname: 'nickname',
-      image: null,
-
-      titleName: null,
-      titleList: Promise.resolve([]),
-      detail: Promise.resolve(null),
-    }),
+    user: Promise.resolve(null),
 
     titleColor: '0xFFFFFFFF',
 

@@ -1,4 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToMany, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToOne,
+} from 'typeorm';
 import { BaseModel } from './base.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MockUserModel } from 'src/_mock/entities/user.entity';
@@ -38,8 +45,17 @@ export class UserModel extends BaseModel {
   @ManyToMany(() => TitleModel, (title) => title.userList)
   titleList: Promise<TitleModel[]>;
 
-  // followUserList;
-  // followingUserList;
+  @ApiProperty({ example: [], required: false })
+  @ManyToMany(() => UserModel, (user) => user.followingUserList, {
+    onDelete: 'CASCADE',
+  })
+  followerUserList: Promise<UserModel[]>;
+
+  @ApiProperty({ example: [], required: false })
+  @ManyToMany(() => UserModel, (user) => user.followerUserList)
+  @JoinTable({ name: 'follow_model' })
+  followingUserList: Promise<UserModel[]>;
+
   // achievementList;
   // logList;
   // activityList;
