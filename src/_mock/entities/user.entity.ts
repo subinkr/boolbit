@@ -1,4 +1,8 @@
 import { UserModel } from 'src/_core/entities/user.entity';
+import { MockUserDetailModel } from './user-detail.entity';
+import { MockActivityModel } from './activity.entity';
+import { MockSkillModel } from './skill.entity';
+import { MockLectureModel } from './lecture.entity';
 
 export class MockUserModel {
   static defaultUser: UserModel = {
@@ -11,17 +15,29 @@ export class MockUserModel {
     password: '$2b$10$qNKbTu/9urzFoJ1QrzoaAej7xmAq.a7Bg3tAhKdDE0p.RuVwfppO2',
     nickname: 'nickname',
     image: null,
+
+    titleName: null,
+    titleList: Promise.resolve([]),
+
+    followerUserList: Promise.resolve([]),
+    followingUserList: Promise.resolve([]),
+
+    activityList: Promise.resolve([MockActivityModel.defaultActivity]),
+    skillList: Promise.resolve([MockSkillModel.defaultSkill]),
+    lectureList: Promise.resolve([MockLectureModel.defaultLecture]),
+
+    detail: Promise.resolve(MockUserDetailModel.defaultDetail),
   };
 
-  static users: UserModel[] = [this.defaultUser];
+  static userList: UserModel[] = [this.defaultUser];
 
   static accessToken: string =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWF0IjoxNzAzNDA5OTA0LCJleHAiOjFlKzUwfQ.BBf7DDbpw-mopP6iPvu8pxc7PoTjCbt5p7h3RPWT_Cw';
 
   findOne({ where: { id, username } }) {
     const [user] = id
-      ? MockUserModel.users.filter((user) => user.id === id)
-      : MockUserModel.users.filter((user) => user.username === username);
+      ? MockUserModel.userList.filter((user) => user.id === id)
+      : MockUserModel.userList.filter((user) => user.username === username);
 
     if (!user) return null;
 
@@ -29,21 +45,25 @@ export class MockUserModel {
   }
 
   findAndCount() {
-    return MockUserModel.users;
+    return MockUserModel.userList;
   }
 
   exists({ where: { id, username } }) {
     const [user] = id
-      ? MockUserModel.users.filter((user) => user.id === id)
-      : MockUserModel.users.filter((user) => user.username === username);
+      ? MockUserModel.userList.filter((user) => user.id === id)
+      : MockUserModel.userList.filter((user) => user.username === username);
 
     if (user) return true;
 
     return false;
   }
 
+  create() {
+    return MockUserModel.defaultUser;
+  }
+
   save() {
-    MockUserModel.users.push(MockUserModel.defaultUser);
+    MockUserModel.userList.push(MockUserModel.defaultUser);
 
     return MockUserModel.defaultUser;
   }

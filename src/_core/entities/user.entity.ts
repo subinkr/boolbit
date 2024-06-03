@@ -1,8 +1,20 @@
-import { Column, Entity } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToOne,
+} from 'typeorm';
 import { BaseModel } from './base.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MockUserModel } from 'src/_mock/entities/user.entity';
 import { Exclude } from 'class-transformer';
+import { TitleModel } from './title.entity';
+import { UserDetailModel } from './user-detail.entity';
+import { ActivityModel } from './activity.entity';
+import { SkillModel } from './skill.entity';
+import { LectureModel } from './lecture.entity';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -22,30 +34,60 @@ export class UserModel extends BaseModel {
   @Column({ nullable: true })
   image?: string;
 
-  // title;
+  @ApiProperty({
+    example: MockUserModel.defaultUser.titleName,
+    required: false,
+  })
+  @Column({ nullable: true })
+  titleName?: string;
 
-  // strength;
-  // agility;
-  // stamina;
-  // intelligence;
-  // wisdom;
+  @ApiProperty({ example: [] })
+  @ManyToMany(() => TitleModel, (title) => title.userList, {
+    onDelete: 'SET NULL',
+  })
+  titleList: Promise<TitleModel[]>;
 
-  // titles;
-  // followUsers;
-  // followingUsers;
+  @ApiProperty({ example: [] })
+  @ManyToMany(() => UserModel, (user) => user.followingUserList, {
+    onDelete: 'CASCADE',
+  })
+  followerUserList: Promise<UserModel[]>;
 
-  // achievements;
-  // boards;
-  // tags;
-  // comments;
-  // likes;
+  @ApiProperty({ example: [] })
+  @ManyToMany(() => UserModel, (user) => user.followerUserList)
+  @JoinTable({ name: 'follow_model' })
+  followingUserList: Promise<UserModel[]>;
 
-  // activities;
-  // skills;
-  // lectures;
+  @ApiProperty({ example: [] })
+  @ManyToMany(() => ActivityModel, (activity) => activity.userList, {
+    onDelete: 'SET NULL',
+  })
+  activityList: Promise<ActivityModel[]>;
 
-  // logs;
+  @ApiProperty({ example: [] })
+  @ManyToMany(() => SkillModel, (skill) => skill.userList, {
+    onDelete: 'SET NULL',
+  })
+  skillList: Promise<SkillModel[]>;
 
-  // chats;
-  // rooms;
+  @ApiProperty({ example: [] })
+  @ManyToMany(() => LectureModel, (lecture) => lecture.userList, {
+    onDelete: 'SET NULL',
+  })
+  lectureList: Promise<LectureModel[]>;
+
+  // chatList;
+  // roomList;
+  // notificationList;
+
+  // boardList;
+  // commentList;
+  // likeList;
+
+  @ApiProperty({ example: MockUserModel.defaultUser.detail })
+  @OneToOne(() => UserDetailModel, (detail) => detail.user, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'user_detail' })
+  detail: Promise<UserDetailModel>;
 }
