@@ -17,9 +17,7 @@ export class TitleModel extends BaseModel {
     example: [],
     required: false,
   })
-  @ManyToMany(() => UserModel, (user) => user.titleList, {
-    onDelete: 'SET NULL',
-  })
+  @ManyToMany(() => UserModel, (user) => user.titleList)
   @JoinTable({ name: 'title_user_model' })
   userList: Promise<UserModel[]>;
 }

@@ -12,6 +12,7 @@ import { MockUserModel } from 'src/_mock/entities/user.entity';
 import { Exclude } from 'class-transformer';
 import { TitleModel } from './title.entity';
 import { UserDetailModel } from './user-detail.entity';
+import { ActivityModel } from './activity.entity';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -38,11 +39,10 @@ export class UserModel extends BaseModel {
   @Column({ nullable: true })
   titleName?: string;
 
-  @ApiProperty({
-    example: MockUserModel.defaultUser.titleList,
-    required: false,
+  @ApiProperty({ example: [], required: false })
+  @ManyToMany(() => TitleModel, (title) => title.userList, {
+    onDelete: 'SET NULL',
   })
-  @ManyToMany(() => TitleModel, (title) => title.userList)
   titleList: Promise<TitleModel[]>;
 
   @ApiProperty({ example: [], required: false })
