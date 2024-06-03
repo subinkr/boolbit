@@ -22,7 +22,7 @@ export class LoginController {
   @ApiOkResponse({ type: ResLogin })
   @ApiBadRequestResponse(badRequest('Invalid password'))
   @ApiNotFoundResponse(notFound('User not found'))
-  async localLogin(@Body() reqLocalLogin: ReqLocalLogin) {
+  async localLogin(@Body() reqLocalLogin: ReqLocalLogin): Promise<ResLogin> {
     return this.loginService.localLogin(reqLocalLogin);
   }
 }
