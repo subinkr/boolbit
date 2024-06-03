@@ -10,6 +10,7 @@ import { RegisterModule } from './register/register.module';
 import { LoginModule } from './login/login.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TitleModel } from './_core/entities/title.entity';
+import { UserDetailModel } from './_core/entities/user-detail.entity';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { TitleModel } from './_core/entities/title.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [UserModel, TitleModel],
+      entities: [UserModel, UserDetailModel, TitleModel],
       synchronize: true,
     }),
     CommonModule,

@@ -1,4 +1,5 @@
 import { UserModel } from 'src/_core/entities/user.entity';
+import { MockUserDetailModel } from './user-detail.entity';
 
 export class MockUserModel {
   static defaultUser: UserModel = {
@@ -13,8 +14,8 @@ export class MockUserModel {
     image: null,
 
     titleName: null,
-    titleColor: null,
     titleList: Promise.resolve([]),
+    detail: Promise.resolve(MockUserDetailModel.defaultDetail),
   };
 
   static userList: UserModel[] = [this.defaultUser];
@@ -44,6 +45,10 @@ export class MockUserModel {
     if (user) return true;
 
     return false;
+  }
+
+  create() {
+    return MockUserModel.defaultUser;
   }
 
   save() {

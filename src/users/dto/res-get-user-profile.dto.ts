@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { MockUserDetailModel } from 'src/_mock/entities/user-detail.entity';
 import { MockUserModel } from 'src/_mock/entities/user.entity';
 
 export class ResGetUserProfile {
@@ -12,17 +13,44 @@ export class ResGetUserProfile {
   nickname: string;
 
   @ApiProperty({ example: MockUserModel.defaultUser.image, required: false })
-  image: string;
+  image?: string;
 
   @ApiProperty({
     example: MockUserModel.defaultUser.titleName,
     required: false,
   })
-  titleName: string;
-
-  @ApiProperty({
-    example: MockUserModel.defaultUser.titleColor,
-    required: false,
-  })
+  titleName?: string;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.titleColor })
   titleColor: string;
+
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.strengthLevel })
+  strengthLevel: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.agilityLevel })
+  agilityLevel: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.staminaLevel })
+  staminaLevel: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.intellectLevel })
+  intellectLevel: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.wisdomLevel })
+  wisdomLevel: number;
+
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.strengthExp })
+  strengthExp: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.agilityExp })
+  agilityExp: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.staminaExp })
+  staminaExp: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.intellectExp })
+  intellectExp: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.wisdomExp })
+  wisdomExp: number;
+
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.followUsers })
+  followUsers: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.followingUsers })
+  followingUsers: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.skills })
+  skills: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.lectures })
+  lectures: number;
 }

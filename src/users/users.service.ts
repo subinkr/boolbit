@@ -29,15 +29,33 @@ export class UsersService {
   }
 
   async getUserProfile(data: number | string): Promise<ResGetUserProfile> {
-    const result = await this.getUser(data);
+    const user = await this.getUser(data);
+    const detail = await user.detail;
 
     return {
-      id: result.id,
-      username: result.username,
-      nickname: result.nickname,
-      image: result.image,
-      titleName: result.titleName,
-      titleColor: result.titleColor,
+      id: user.id,
+      username: user.username,
+      nickname: user.nickname,
+      image: user.image,
+      titleName: user.titleName,
+      titleColor: detail.titleColor,
+
+      strengthLevel: detail.strengthLevel,
+      agilityLevel: detail.agilityLevel,
+      staminaLevel: detail.staminaLevel,
+      intellectLevel: detail.intellectLevel,
+      wisdomLevel: detail.wisdomLevel,
+
+      strengthExp: detail.strengthExp,
+      agilityExp: detail.agilityExp,
+      staminaExp: detail.staminaExp,
+      intellectExp: detail.intellectExp,
+      wisdomExp: detail.wisdomExp,
+
+      followUsers: detail.followUsers,
+      followingUsers: detail.followingUsers,
+      skills: detail.skills,
+      lectures: detail.lectures,
     };
   }
 }

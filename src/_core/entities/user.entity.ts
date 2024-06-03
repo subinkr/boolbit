@@ -1,9 +1,10 @@
-import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, OneToOne } from 'typeorm';
 import { BaseModel } from './base.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MockUserModel } from 'src/_mock/entities/user.entity';
 import { Exclude } from 'class-transformer';
 import { TitleModel } from './title.entity';
+import { UserDetailModel } from './user-detail.entity';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -31,47 +32,27 @@ export class UserModel extends BaseModel {
   titleName?: string;
 
   @ApiProperty({
-    example: MockUserModel.defaultUser.titleColor,
-    required: false,
-  })
-  @Column({ nullable: true })
-  titleColor?: string;
-
-  @ApiProperty({
     example: MockUserModel.defaultUser.titleList,
     required: false,
   })
   @ManyToMany(() => TitleModel, (title) => title.userList)
   titleList: Promise<TitleModel[]>;
 
-  // strengthLevel;
-  // agilityLevel;
-  // staminaLevel;
-  // intellectLevel;
-  // wisdomLevel;
-  // strengthExp;
-  // agilityExp;
-  // staminaExp;
-  // intellectExp;
-  // wisdomExp;
-
   // followUserList;
   // followingUserList;
-  // followUsers;
-  // followingUsers;
-
   // achievementList;
   // logList;
-
   // activityList;
   // skillList;
   // lectureList;
-  // skills;
-  // lectures;
-
   // chatList;
   // roomList;
-
   // notificationList;
-  // notifications;
+
+  @ApiProperty({ example: MockUserModel.defaultUser.detail })
+  @OneToOne(() => UserDetailModel, (detail) => detail.user, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'user_detail' })
+  detail: Promise<UserDetailModel>;
 }

@@ -6,12 +6,15 @@ import { Repository } from 'typeorm';
 import { ReqLocalRegister } from './dto/req-local-register.dto';
 import { ResRegister } from './dto/res-register.dto';
 import { ResWithdrawRegister } from './dto/res-withdraw-register.dto';
+import { UserDetailModel } from 'src/_core/entities/user-detail.entity';
 
 @Injectable()
 export class RegisterService {
   constructor(
     @InjectRepository(UserModel)
     private readonly userRepository: Repository<UserModel>,
+    @InjectRepository(UserDetailModel)
+    private readonly userDetailRepository: Repository<UserDetailModel>,
     private readonly authService: AuthService,
   ) {}
   async localRegister(
@@ -27,10 +30,14 @@ export class RegisterService {
 
     const hashPassword = await this.authService.hashPassword(password);
 
-    const user = await this.userRepository.save({
+    const detail = await this.userDetailRepository.save({});
+    const user = this.userRepository.create({
       ...reqLocalRegister,
       password: hashPassword,
     });
+    user.detail = Promise.resolve(detail);
+    this.userRepository.save(user);
+
     const accessToken = this.authService.signToken(user.id);
 
     return { accessToken };
