@@ -90,4 +90,16 @@ export class UserDetailModel extends BaseModel {
   })
   @Column({ default: 0 })
   lectures: number;
+
+  @ApiProperty({
+    example: MockUserDetailModel.defaultDetail.walk,
+  })
+  @Column({ default: 0 })
+  walk: number;
+
+  @ApiProperty({
+    example: MockUserDetailModel.defaultDetail.run,
+  })
+  @Column({ default: 0 })
+  run: number;
 }

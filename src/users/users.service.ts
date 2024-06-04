@@ -57,7 +57,9 @@ export class UsersService {
       skills: detail.skills,
       lectures: detail.lectures,
 
-      activityList: await user.activityList,
+      walk: detail.walk,
+      run: detail.run,
+
       skillList: await user.skillList,
       lectureList: await user.lectureList,
     };

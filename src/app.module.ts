@@ -11,7 +11,6 @@ import { LoginModule } from './login/login.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TitleModel } from './_core/entities/title.entity';
 import { UserDetailModel } from './_core/entities/user-detail.entity';
-import { ActivityModel } from './_core/entities/activity.entity';
 import { SkillModel } from './_core/entities/skill.entity';
 import { LectureModel } from './_core/entities/lecture.entity';
 
@@ -31,7 +30,6 @@ import { LectureModel } from './_core/entities/lecture.entity';
       entities: [
         UserModel,
         UserDetailModel,
-        ActivityModel,
         SkillModel,
         LectureModel,
         TitleModel,

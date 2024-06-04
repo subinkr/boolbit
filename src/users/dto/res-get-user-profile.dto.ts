@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ActivityModel } from 'src/_core/entities/activity.entity';
 import { LectureModel } from 'src/_core/entities/lecture.entity';
 import { SkillModel } from 'src/_core/entities/skill.entity';
 import { MockUserDetailModel } from 'src/_mock/entities/user-detail.entity';
@@ -57,8 +56,11 @@ export class ResGetUserProfile {
   @ApiProperty({ example: MockUserDetailModel.defaultDetail.lectures })
   lectures: number;
 
-  @ApiProperty({ example: MockUserModel.defaultUser.activityList })
-  activityList: ActivityModel[];
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.walk })
+  walk: number;
+  @ApiProperty({ example: MockUserDetailModel.defaultDetail.run })
+  run: number;
+
   @ApiProperty({ example: MockUserModel.defaultUser.skillList })
   skillList: SkillModel[];
   @ApiProperty({ example: MockUserModel.defaultUser.lectureList })

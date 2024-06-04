@@ -12,7 +12,6 @@ import { MockUserModel } from 'src/_mock/entities/user.entity';
 import { Exclude } from 'class-transformer';
 import { TitleModel } from './title.entity';
 import { UserDetailModel } from './user-detail.entity';
-import { ActivityModel } from './activity.entity';
 import { SkillModel } from './skill.entity';
 import { LectureModel } from './lecture.entity';
 
@@ -57,12 +56,6 @@ export class UserModel extends BaseModel {
   @ManyToMany(() => UserModel, (user) => user.followerUserList)
   @JoinTable({ name: 'follow_model' })
   followingUserList: Promise<UserModel[]>;
-
-  @ApiProperty({ example: [] })
-  @ManyToMany(() => ActivityModel, (activity) => activity.userList, {
-    onDelete: 'SET NULL',
-  })
-  activityList: Promise<ActivityModel[]>;
 
   @ApiProperty({ example: [] })
   @ManyToMany(() => SkillModel, (skill) => skill.userList, {
