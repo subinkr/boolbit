@@ -4,6 +4,7 @@ import { UserModel } from './user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MockBoardModel } from 'src/_mock/entities/board.entity';
 import { CommentModel } from './comment.entity';
+import { LikeModel } from './like.entity';
 
 @Entity()
 export class BoardModel extends BaseModel {
@@ -22,6 +23,10 @@ export class BoardModel extends BaseModel {
   @ApiProperty({ example: [] })
   @OneToMany(() => CommentModel, (comment) => comment.user)
   commentList: Promise<CommentModel[]>;
+
+  @ApiProperty({ example: [] })
+  @OneToMany(() => LikeModel, (like) => like.user)
+  likeList: Promise<LikeModel[]>;
 
   @ApiProperty({ example: MockBoardModel.defaultBoard.user })
   @ManyToOne(() => UserModel, (user) => user.boardList, {

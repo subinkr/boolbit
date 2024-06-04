@@ -15,6 +15,7 @@ import { SkillModel } from './_core/entities/skill.entity';
 import { LectureModel } from './_core/entities/lecture.entity';
 import { BoardModel } from './_core/entities/board.entity';
 import { CommentModel } from './_core/entities/comment.entity';
+import { LikeModel } from './_core/entities/like.entity';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { CommentModel } from './_core/entities/comment.entity';
         TitleModel,
         BoardModel,
         CommentModel,
+        LikeModel,
       ],
       synchronize: true,
     }),

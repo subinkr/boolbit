@@ -12,6 +12,7 @@ export class MockBoardModel {
     image: null,
     content: 'content',
     commentList: Promise.resolve([]),
+    likeList: Promise.resolve([]),
 
     user: MockUserModel.defaultUser,
   };

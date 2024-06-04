@@ -18,6 +18,8 @@ import { BoardModel } from 'src/_core/entities/board.entity';
 import { MockBoardModel } from './entities/board.entity';
 import { CommentModel } from 'src/_core/entities/comment.entity';
 import { MockCommentModel } from './entities/comment.entity';
+import { LikeModel } from 'src/_core/entities/like.entity';
+import { MockLikeModel } from './entities/like.entity';
 
 export const providers = [
   JwtService,
@@ -52,5 +54,9 @@ export const providers = [
   {
     provide: getRepositoryToken(CommentModel),
     useClass: MockCommentModel,
+  },
+  {
+    provide: getRepositoryToken(LikeModel),
+    useClass: MockLikeModel,
   },
 ];

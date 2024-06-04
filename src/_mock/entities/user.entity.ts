@@ -27,6 +27,7 @@ export class MockUserModel {
 
     boardList: Promise.resolve([]),
     commentList: Promise.resolve([]),
+    likeList: Promise.resolve([]),
 
     detail: Promise.resolve(MockUserDetailModel.defaultDetail),
   };

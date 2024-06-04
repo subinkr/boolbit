@@ -17,6 +17,7 @@ import { SkillModel } from './skill.entity';
 import { LectureModel } from './lecture.entity';
 import { BoardModel } from './board.entity';
 import { CommentModel } from './comment.entity';
+import { LikeModel } from './like.entity';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -84,7 +85,9 @@ export class UserModel extends BaseModel {
   @OneToMany(() => CommentModel, (comment) => comment.user)
   commentList: Promise<CommentModel[]>;
 
-  // likeList;
+  @ApiProperty({ example: [] })
+  @OneToMany(() => LikeModel, (like) => like.user)
+  likeList: Promise<LikeModel[]>;
 
   @ApiProperty({ example: MockUserModel.defaultUser.detail })
   @OneToOne(() => UserDetailModel, (detail) => detail.user, {
