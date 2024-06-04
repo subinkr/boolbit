@@ -14,6 +14,10 @@ import { SkillModel } from 'src/_core/entities/skill.entity';
 import { MockSkillModel } from './entities/skill.entity';
 import { LectureModel } from 'src/_core/entities/lecture.entity';
 import { MockLectureModel } from './entities/lecture.entity';
+import { BoardModel } from 'src/_core/entities/board.entity';
+import { MockBoardModel } from './entities/board.entity';
+import { CommentModel } from 'src/_core/entities/comment.entity';
+import { MockCommentModel } from './entities/comment.entity';
 
 export const providers = [
   JwtService,
@@ -40,5 +44,13 @@ export const providers = [
   {
     provide: getRepositoryToken(TitleModel),
     useClass: MockTitleModel,
+  },
+  {
+    provide: getRepositoryToken(BoardModel),
+    useClass: MockBoardModel,
+  },
+  {
+    provide: getRepositoryToken(CommentModel),
+    useClass: MockCommentModel,
   },
 ];

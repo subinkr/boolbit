@@ -16,6 +16,7 @@ import { UserDetailModel } from './user-detail.entity';
 import { SkillModel } from './skill.entity';
 import { LectureModel } from './lecture.entity';
 import { BoardModel } from './board.entity';
+import { CommentModel } from './comment.entity';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -78,8 +79,13 @@ export class UserModel extends BaseModel {
   @ApiProperty({ example: [] })
   @OneToMany(() => BoardModel, (board) => board.user)
   boardList: Promise<BoardModel[]>;
-  // commentList;
+
+  @ApiProperty({ example: [] })
+  @OneToMany(() => CommentModel, (comment) => comment.user)
+  commentList: Promise<CommentModel[]>;
+
   // likeList;
+
   @ApiProperty({ example: MockUserModel.defaultUser.detail })
   @OneToOne(() => UserDetailModel, (detail) => detail.user, {
     onDelete: 'CASCADE',

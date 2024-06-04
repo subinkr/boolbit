@@ -26,6 +26,7 @@ export class MockUserModel {
     lectureList: Promise.resolve([MockLectureModel.defaultLecture]),
 
     boardList: Promise.resolve([]),
+    commentList: Promise.resolve([]),
 
     detail: Promise.resolve(MockUserDetailModel.defaultDetail),
   };

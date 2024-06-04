@@ -39,6 +39,7 @@ export class RegisterService {
     user.skillList = Promise.resolve([]);
     user.lectureList = Promise.resolve([]);
     user.boardList = Promise.resolve([]);
+    user.commentList = Promise.resolve([]);
     this.userRepository.save(user);
 
     const accessToken = this.authService.signToken(user.id);

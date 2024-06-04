@@ -1,16 +1,14 @@
-import { BoardModel } from 'src/_core/entities/board.entity';
 import { MockUserModel } from './user.entity';
+import { CommentModel } from 'src/_core/entities/comment.entity';
 
-export class MockBoardModel {
-  static defaultBoard: BoardModel = {
+export class MockCommentModel {
+  static defaultComment: CommentModel = {
     id: 1,
     createdAt: new Date(1),
     updatedAt: new Date(1),
     deletedAt: null,
 
-    title: 'title',
     content: 'content',
-    commentList: Promise.resolve([]),
 
     user: MockUserModel.defaultUser,
   };

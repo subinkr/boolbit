@@ -1,9 +1,9 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { BaseModel } from './base.entity';
 import { UserModel } from './user.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { MockUserModel } from 'src/_mock/entities/user.entity';
 import { MockBoardModel } from 'src/_mock/entities/board.entity';
+import { CommentModel } from './comment.entity';
 
 @Entity()
 export class BoardModel extends BaseModel {
@@ -15,7 +15,11 @@ export class BoardModel extends BaseModel {
   @Column()
   content: string;
 
-  @ApiProperty({ example: MockUserModel.defaultUser })
+  @ApiProperty({ example: [] })
+  @OneToMany(() => CommentModel, (comment) => comment.user)
+  commentList: Promise<CommentModel[]>;
+
+  @ApiProperty({ example: MockBoardModel.defaultBoard.user })
   @ManyToOne(() => UserModel, (user) => user.boardList, {
     onDelete: 'CASCADE',
     eager: true,
