@@ -18,6 +18,7 @@ import { LectureModel } from './lecture.entity';
 import { BoardModel } from './board.entity';
 import { CommentModel } from './comment.entity';
 import { LikeModel } from './like.entity';
+import { NotificationModel } from './notification.entity';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -75,7 +76,10 @@ export class UserModel extends BaseModel {
 
   // chatList;
   // roomList;
-  // notificationList;
+
+  @ApiProperty({ example: [] })
+  @OneToMany(() => NotificationModel, (notification) => notification.user)
+  notificationList: Promise<NotificationModel[]>;
 
   @ApiProperty({ example: [] })
   @OneToMany(() => BoardModel, (board) => board.user)

@@ -20,6 +20,8 @@ import { CommentModel } from 'src/_core/entities/comment.entity';
 import { MockCommentModel } from './entities/comment.entity';
 import { LikeModel } from 'src/_core/entities/like.entity';
 import { MockLikeModel } from './entities/like.entity';
+import { NotificationModel } from 'src/_core/entities/notification.entity';
+import { MockNotificationModel } from './entities/notification.entity';
 
 export const providers = [
   JwtService,
@@ -46,6 +48,10 @@ export const providers = [
   {
     provide: getRepositoryToken(TitleModel),
     useClass: MockTitleModel,
+  },
+  {
+    provide: getRepositoryToken(NotificationModel),
+    useClass: MockNotificationModel,
   },
   {
     provide: getRepositoryToken(BoardModel),

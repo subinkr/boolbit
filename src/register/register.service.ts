@@ -41,6 +41,7 @@ export class RegisterService {
     user.boardList = Promise.resolve([]);
     user.commentList = Promise.resolve([]);
     user.likeList = Promise.resolve([]);
+    user.notificationList = Promise.resolve([]);
     this.userRepository.save(user);
 
     const accessToken = this.authService.signToken(user.id);

@@ -25,6 +25,8 @@ export class MockUserModel {
     skillList: Promise.resolve([MockSkillModel.defaultSkill]),
     lectureList: Promise.resolve([MockLectureModel.defaultLecture]),
 
+    notificationList: Promise.resolve([]),
+
     boardList: Promise.resolve([]),
     commentList: Promise.resolve([]),
     likeList: Promise.resolve([]),
