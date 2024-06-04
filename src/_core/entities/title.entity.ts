@@ -13,10 +13,7 @@ export class TitleModel extends BaseModel {
   @Column()
   color: string;
 
-  @ApiProperty({
-    example: [],
-    required: false,
-  })
+  @ApiProperty({ example: [], required: false })
   @ManyToMany(() => UserModel, (user) => user.titleList)
   @JoinTable({ name: 'title_user_model' })
   userList: Promise<UserModel[]>;
