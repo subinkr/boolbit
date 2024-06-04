@@ -35,13 +35,23 @@ export class RegisterService {
       ...reqLocalRegister,
       password: hashPassword,
     });
-    user.detail = Promise.resolve(detail);
+    user.titleList = Promise.resolve([]);
+    user.followerUserList = Promise.resolve([]);
+    user.followerUserList = Promise.resolve([]);
+
     user.skillList = Promise.resolve([]);
     user.lectureList = Promise.resolve([]);
+
+    user.chatList = Promise.resolve([]);
+    user.roomList = Promise.resolve([]);
+    user.notificationList = Promise.resolve([]);
+
     user.boardList = Promise.resolve([]);
     user.commentList = Promise.resolve([]);
     user.likeList = Promise.resolve([]);
-    user.notificationList = Promise.resolve([]);
+
+    user.detail = Promise.resolve(detail);
+
     const { id, image } = await this.userRepository.save(user);
 
     const accessToken = this.authService.signToken(user.id);

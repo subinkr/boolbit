@@ -22,6 +22,10 @@ import { LikeModel } from 'src/_core/entities/like.entity';
 import { MockLikeModel } from './entities/like.entity';
 import { NotificationModel } from 'src/_core/entities/notification.entity';
 import { MockNotificationModel } from './entities/notification.entity';
+import { ChatModel } from 'src/_core/entities/chat.entity';
+import { MockChatModel } from './entities/chat.entity';
+import { RoomModel } from 'src/_core/entities/room.entity';
+import { MockRoomModel } from './entities/room.entity';
 
 export const providers = [
   JwtService,
@@ -48,6 +52,14 @@ export const providers = [
   {
     provide: getRepositoryToken(TitleModel),
     useClass: MockTitleModel,
+  },
+  {
+    provide: getRepositoryToken(ChatModel),
+    useClass: MockChatModel,
+  },
+  {
+    provide: getRepositoryToken(RoomModel),
+    useClass: MockRoomModel,
   },
   {
     provide: getRepositoryToken(NotificationModel),

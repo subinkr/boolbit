@@ -6,6 +6,5 @@ const { defaultUser, accessToken } = MockUserModel;
 export const mockResLogin: ResLogin = {
   accessToken,
   id: defaultUser.id,
-  nickname: defaultUser.nickname,
   image: defaultUser.image,
 };
