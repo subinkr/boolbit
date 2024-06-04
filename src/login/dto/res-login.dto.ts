@@ -8,9 +8,6 @@ export class ResLogin {
   @ApiProperty({ example: MockUserModel.defaultUser.id })
   id: number;
 
-  @ApiProperty({ example: MockUserModel.defaultUser.nickname })
-  nickname: string;
-
   @ApiProperty({ example: MockUserModel.defaultUser.image })
   image?: string;
 }

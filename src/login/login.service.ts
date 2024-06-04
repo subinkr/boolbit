@@ -22,7 +22,6 @@ export class LoginService {
     return {
       accessToken,
       id: user.id,
-      nickname: user.nickname,
       image: user.image,
     };
   }

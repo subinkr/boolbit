@@ -42,11 +42,11 @@ export class RegisterService {
     user.commentList = Promise.resolve([]);
     user.likeList = Promise.resolve([]);
     user.notificationList = Promise.resolve([]);
-    this.userRepository.save(user);
+    const { id, image } = await this.userRepository.save(user);
 
     const accessToken = this.authService.signToken(user.id);
 
-    return { accessToken };
+    return { accessToken, id, image };
   }
 
   async withdrawRegister(id: number): Promise<ResWithdrawRegister> {
