@@ -9,6 +9,7 @@ export class MockBoardModel {
     deletedAt: null,
 
     title: 'title',
+    image: null,
     content: 'content',
     commentList: Promise.resolve([]),
 

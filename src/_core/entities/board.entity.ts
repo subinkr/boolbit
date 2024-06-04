@@ -11,6 +11,10 @@ export class BoardModel extends BaseModel {
   @Column()
   title: string;
 
+  @ApiProperty({ example: MockBoardModel.defaultBoard.image })
+  @Column({ nullable: true })
+  image?: string;
+
   @ApiProperty({ example: MockBoardModel.defaultBoard.content })
   @Column()
   content: string;
