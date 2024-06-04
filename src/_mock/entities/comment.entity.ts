@@ -10,6 +10,7 @@ export class MockCommentModel {
 
     content: 'content',
 
+    board: Promise.resolve(null),
     user: MockUserModel.defaultUser,
   };
 }

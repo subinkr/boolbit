@@ -21,7 +21,7 @@ export class BoardModel extends BaseModel {
   content: string;
 
   @ApiProperty({ example: [] })
-  @OneToMany(() => CommentModel, (comment) => comment.user)
+  @OneToMany(() => CommentModel, (comment) => comment.board)
   commentList: Promise<CommentModel[]>;
 
   @ApiProperty({ example: [] })
