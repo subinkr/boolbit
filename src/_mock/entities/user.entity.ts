@@ -2,6 +2,7 @@ import { UserModel } from 'src/_core/entities/user.entity';
 import { MockUserDetailModel } from './user-detail.entity';
 import { MockSkillModel } from './skill.entity';
 import { MockLectureModel } from './lecture.entity';
+import { MockBoardModel } from './board.entity';
 
 export class MockUserModel {
   static defaultUser: UserModel = {
@@ -23,6 +24,8 @@ export class MockUserModel {
 
     skillList: Promise.resolve([MockSkillModel.defaultSkill]),
     lectureList: Promise.resolve([MockLectureModel.defaultLecture]),
+
+    boardList: Promise.resolve([]),
 
     detail: Promise.resolve(MockUserDetailModel.defaultDetail),
   };

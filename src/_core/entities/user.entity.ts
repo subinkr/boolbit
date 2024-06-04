@@ -4,6 +4,7 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  OneToMany,
   OneToOne,
 } from 'typeorm';
 import { BaseModel } from './base.entity';
@@ -14,6 +15,7 @@ import { TitleModel } from './title.entity';
 import { UserDetailModel } from './user-detail.entity';
 import { SkillModel } from './skill.entity';
 import { LectureModel } from './lecture.entity';
+import { BoardModel } from './board.entity';
 
 @Entity()
 export class UserModel extends BaseModel {
@@ -73,10 +75,11 @@ export class UserModel extends BaseModel {
   // roomList;
   // notificationList;
 
-  // boardList;
+  @ApiProperty({ example: [] })
+  @OneToMany(() => BoardModel, (board) => board.user)
+  boardList: Promise<BoardModel[]>;
   // commentList;
   // likeList;
-
   @ApiProperty({ example: MockUserModel.defaultUser.detail })
   @OneToOne(() => UserDetailModel, (detail) => detail.user, {
     onDelete: 'CASCADE',
