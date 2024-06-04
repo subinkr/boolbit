@@ -1,5 +1,4 @@
 import { NotificationModel } from 'src/_core/entities/notification.entity';
-import { MockUserModel } from './user.entity';
 
 export class MockNotificationModel {
   static defaultNotification: NotificationModel = {
@@ -12,6 +11,6 @@ export class MockNotificationModel {
     content: 'content',
     fromUserId: 1,
 
-    user: MockUserModel.defaultUser,
+    user: Promise.resolve(null),
   };
 }

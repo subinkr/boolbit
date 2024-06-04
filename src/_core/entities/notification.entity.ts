@@ -15,7 +15,6 @@ export class NotificationModel extends BaseModel {
 
   @ManyToOne(() => UserModel, (user) => user.notificationList, {
     onDelete: 'CASCADE',
-    eager: true,
   })
-  user: UserModel;
+  user: Promise<UserModel>;
 }
