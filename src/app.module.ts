@@ -19,6 +19,7 @@ import { LikeModel } from './_core/entities/like.entity';
 import { NotificationModel } from './_core/entities/notification.entity';
 import { ChatModel } from './_core/entities/chat.entity';
 import { RoomModel } from './_core/entities/room.entity';
+import { BoardsModule } from './boards/boards.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { RoomModel } from './_core/entities/room.entity';
     UsersModule,
     RegisterModule,
     LoginModule,
+    BoardsModule,
   ],
   controllers: [AppController],
   providers: [

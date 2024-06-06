@@ -11,4 +11,5 @@ npm i uuid
 npm i @nestjs/config
 npm i @nestjs/jwt bcrypt
 npm i class-transformer class-validator
+npm i multer @types/multer @nestjs/platform-express
 ```

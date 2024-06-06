@@ -11,9 +11,29 @@ export class MockBoardModel {
     title: 'title',
     image: null,
     content: 'content',
+    comments: 0,
+    likes: 0,
     commentList: Promise.resolve([]),
     likeList: Promise.resolve([]),
 
     user: MockUserModel.defaultUser,
   };
+
+  static boardList: BoardModel[] = [this.defaultBoard];
+
+  create() {
+    return MockBoardModel.defaultBoard;
+  }
+
+  findOne({ where: { id } }) {
+    const [board] = MockBoardModel.boardList.filter((board) => board.id === id);
+
+    if (!board) return null;
+
+    return board;
+  }
+
+  save() {
+    return MockBoardModel.defaultBoard;
+  }
 }

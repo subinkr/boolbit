@@ -20,6 +20,14 @@ export class BoardModel extends BaseModel {
   @Column()
   content: string;
 
+  @ApiProperty({ example: MockBoardModel.defaultBoard.comments })
+  @Column({ default: 0 })
+  comments: number;
+
+  @ApiProperty({ example: MockBoardModel.defaultBoard.likes })
+  @Column({ default: 0 })
+  likes: number;
+
   @ApiProperty({ example: [] })
   @OneToMany(() => CommentModel, (comment) => comment.board)
   commentList: Promise<CommentModel[]>;
