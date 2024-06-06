@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
   Post,
   UploadedFile,
   UseGuards,
@@ -35,8 +37,7 @@ export class BoardsController {
       properties: {
         title: { type: 'string' },
         content: { type: 'string' },
-        price: { type: 'string' },
-        signature: { type: 'string' },
+        tags: { type: 'string' },
         file: {
           type: 'string',
           format: 'binary',
@@ -51,5 +52,10 @@ export class BoardsController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     return this.boardsService.postBoard(id, reqPostBoard, file);
+  }
+
+  @Get(':id')
+  async getBoard(@Param('id') id: number) {
+    return this.boardsService.getBoard(id);
   }
 }

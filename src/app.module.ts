@@ -20,6 +20,7 @@ import { NotificationModel } from './_core/entities/notification.entity';
 import { ChatModel } from './_core/entities/chat.entity';
 import { RoomModel } from './_core/entities/room.entity';
 import { BoardsModule } from './boards/boards.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
@@ -54,6 +55,10 @@ import { BoardsModule } from './boards/boards.module';
     RegisterModule,
     LoginModule,
     BoardsModule,
+    ServeStaticModule.forRoot({
+      rootPath: `${process.cwd()}/public`,
+      serveRoot: '/public',
+    }),
   ],
   controllers: [AppController],
   providers: [
