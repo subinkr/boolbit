@@ -2,8 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { LoginController } from './login.controller';
 import { LoginService } from './login.service';
 import { providers } from 'src/_mock/providers';
-import { mockResLogin } from 'src/_mock/dtos/users/res-login.dto';
-import { mockReqLocalLogin } from 'src/_mock/dtos/users/req-local-login.dto';
+import { mockResLogin } from 'src/_mock/dtos/login/res-login.dto';
+import { mockReqLocalLogin } from 'src/_mock/dtos/login/req-local-login.dto';
 
 describe('LoginController', () => {
   let controller: LoginController;

@@ -4,8 +4,8 @@ import { providers } from 'src/_mock/providers';
 import { AuthService } from 'src/_common/auth/auth.service';
 import { UsersService } from 'src/users/users.service';
 import { MockUserModel } from 'src/_mock/entities/user.entity';
-import { mockReqLocalLogin } from 'src/_mock/dtos/users/req-local-login.dto';
-import { mockResLogin } from 'src/_mock/dtos/users/res-login.dto';
+import { mockReqLocalLogin } from 'src/_mock/dtos/login/req-local-login.dto';
+import { mockResLogin } from 'src/_mock/dtos/login/res-login.dto';
 
 describe('LoginService', () => {
   let service: LoginService;
