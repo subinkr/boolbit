@@ -27,6 +27,7 @@ import { MockChatModel } from './entities/chat.entity';
 import { RoomModel } from 'src/_core/entities/room.entity';
 import { MockRoomModel } from './entities/room.entity';
 import { BoardsService } from 'src/boards/boards.service';
+import { DataService } from 'src/_common/data/data.service';
 
 export const providers = [
   JwtService,
@@ -35,6 +36,7 @@ export const providers = [
   UsersService,
   LoginService,
   BoardsService,
+  DataService,
   {
     provide: getRepositoryToken(UserModel),
     useClass: MockUserModel,
