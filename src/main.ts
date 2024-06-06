@@ -12,6 +12,7 @@ async function bootstrap() {
     .addTag('Login')
     .addTag('Register')
     .addTag('Users')
+    .addTag('Boards')
     .addBearerAuth()
     .build();
 
