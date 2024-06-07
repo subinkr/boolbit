@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { ReqPostBoard } from './dto/req-post-board.dto';
 import { UsersService } from 'src/users/users.service';
 import { DataService } from 'src/_common/data/data.service';
+import { ResPostBoard } from './dto/res-post-board.dto';
+import { ResGetBoards } from './dto/res-get-boards.dto';
 
 @Injectable()
 export class BoardsService {
@@ -19,7 +21,7 @@ export class BoardsService {
     userId: number,
     reqPostBoard: ReqPostBoard,
     file: Express.Multer.File,
-  ) {
+  ): Promise<ResPostBoard> {
     const user = await this.usersService.getUser(userId);
 
     const image = file ? await this.dataService.uploadImage(file) : null;
@@ -33,12 +35,27 @@ export class BoardsService {
       image,
     });
 
-    return newBoard.id;
+    return { id: newBoard.id };
   }
 
-  async getBoards() {}
+  async getBoards(page: number = 1): Promise<ResGetBoards> {
+    const take = 5;
+    const skip = take * (page - 1);
 
-  async getBoard(id: number) {
+    const findAndCount = await this.boardRepository.findAndCount({
+      take,
+      skip,
+    });
+
+    const { array: boards, totalPages } = this.dataService.pagination(
+      findAndCount,
+      skip,
+    );
+
+    return { boards, totalPages };
+  }
+
+  async getBoard(id: number): Promise<BoardModel> {
     const board = await this.boardRepository.findOne({ where: { id } });
 
     if (!board) {
