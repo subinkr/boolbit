@@ -30,4 +30,12 @@ describe('BoardsController', () => {
       expect(service.postBoard).toHaveBeenCalled();
     });
   });
+
+  describe('Get board', () => {
+    it('USE | Get board', async () => {
+      service.getBoard = jest.fn().mockReturnValue(defaultBoard);
+      await controller.getBoard(defaultUser.id);
+      expect(service.getBoard).toHaveBeenCalled();
+    });
+  });
 });

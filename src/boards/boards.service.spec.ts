@@ -24,9 +24,15 @@ describe('BoardsService', () => {
   });
 
   describe('Post board', () => {
-    it('USE | getUser', async () => {
+    it('RUN | getUser(id, data, image)', async () => {
       usersService.getUser = jest.fn().mockReturnValue(defaultUser);
       await service.postBoard(defaultUser.id, mockReqPostBoard, emptyFile);
+      expect(usersService.getUser).toHaveBeenCalled();
+    });
+
+    it('RUN | getUser(id, data, null)', async () => {
+      usersService.getUser = jest.fn().mockReturnValue(defaultUser);
+      await service.postBoard(defaultUser.id, mockReqPostBoard, null);
       expect(usersService.getUser).toHaveBeenCalled();
     });
   });
