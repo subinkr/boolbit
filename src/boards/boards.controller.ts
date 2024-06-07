@@ -3,7 +3,9 @@ import {
   Controller,
   Get,
   Param,
+  ParseIntPipe,
   Post,
+  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -13,6 +15,8 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiConsumes,
+  ApiCreatedResponse,
+  ApiOkResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
@@ -20,6 +24,9 @@ import { ReqPostBoard } from './dto/req-post-board.dto';
 import { AuthId } from 'src/_common/auth/auth.decorator';
 import { AuthGuard } from 'src/_common/auth/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { BoardModel } from 'src/_core/entities/board.entity';
+import { ResPostBoard } from './dto/res-post-board.dto';
+import { ResGetBoards } from './dto/res-get-boards.dto';
 
 @Controller('boards')
 @ApiTags('Boards')
@@ -45,17 +52,27 @@ export class BoardsController {
       },
     },
   })
+  @ApiCreatedResponse({ type: ResPostBoard })
   @ApiBearerAuth()
   async postBoard(
     @AuthId() id: number,
     @Body() reqPostBoard: ReqPostBoard,
     @UploadedFile() file: Express.Multer.File,
-  ) {
+  ): Promise<ResPostBoard> {
     return this.boardsService.postBoard(id, reqPostBoard, file);
   }
 
   @Get(':id')
-  async getBoard(@Param('id') id: number) {
+  @ApiOperation({ summary: 'Get board' })
+  @ApiOkResponse({ type: ResGetBoards })
+  async getBoard(@Param('id') id: number): Promise<BoardModel> {
     return this.boardsService.getBoard(id);
+  }
+
+  @Get()
+  @ApiOperation({ summary: 'Get boards' })
+  @ApiOkResponse({ type: ResGetBoards })
+  async getBoards(@Query('page', ParseIntPipe) page: number) {
+    return this.boardsService.getBoards(page);
   }
 }

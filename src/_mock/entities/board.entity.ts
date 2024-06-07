@@ -33,6 +33,10 @@ export class MockBoardModel {
     return board;
   }
 
+  findAndCount() {
+    return [[MockBoardModel.defaultBoard], 1];
+  }
+
   save() {
     return MockBoardModel.defaultBoard;
   }
