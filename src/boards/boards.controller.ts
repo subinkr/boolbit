@@ -27,6 +27,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { BoardModel } from 'src/_core/entities/board.entity';
 import { ResPostBoard } from './dto/res-post-board.dto';
 import { ResGetBoards } from './dto/res-get-boards.dto';
+import { ResGetBoard } from './dto/res-get-board.dto';
 
 @Controller('boards')
 @ApiTags('Boards')
@@ -64,7 +65,7 @@ export class BoardsController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get board' })
-  @ApiOkResponse({ type: ResGetBoards })
+  @ApiOkResponse({ type: ResGetBoard })
   async getBoard(@Param('id') id: number): Promise<BoardModel> {
     return this.boardsService.getBoard(id);
   }

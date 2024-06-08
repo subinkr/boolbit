@@ -19,6 +19,22 @@ export class MockBoardModel {
     user: MockUserModel.defaultUser,
   };
 
+  static responseBoard = {
+    id: 1,
+    title: 'title',
+    image: null,
+    content: 'content',
+    comments: 0,
+    likes: 0,
+    user: {
+      id: 1,
+      username: 'username',
+      nickname: 'nickname',
+      image: null,
+      titleName: null,
+    },
+  };
+
   static boardList: BoardModel[] = [this.defaultBoard];
 
   create() {

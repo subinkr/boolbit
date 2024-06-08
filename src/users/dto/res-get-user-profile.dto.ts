@@ -61,8 +61,8 @@ export class ResGetUserProfile {
   @ApiProperty({ example: MockUserDetailModel.defaultDetail.run })
   run: number;
 
-  @ApiProperty({ example: MockUserModel.defaultUser.skillList })
+  @ApiProperty({ example: [] })
   skillList: SkillModel[];
-  @ApiProperty({ example: MockUserModel.defaultUser.lectureList })
+  @ApiProperty({ example: [] })
   lectureList: LectureModel[];
 }
