@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 import { MockBaseModel } from 'src/_mock/entities/base.entity';
 import {
   CreateDateColumn,
@@ -19,6 +20,7 @@ export class BaseModel {
     required: false,
   })
   @CreateDateColumn()
+  @Exclude({ toPlainOnly: true })
   createdAt: Date;
 
   @ApiProperty({
@@ -26,6 +28,7 @@ export class BaseModel {
     required: false,
   })
   @UpdateDateColumn()
+  @Exclude({ toPlainOnly: true })
   updatedAt: Date;
 
   @ApiProperty({
@@ -33,5 +36,6 @@ export class BaseModel {
     required: false,
   })
   @DeleteDateColumn()
+  @Exclude({ toPlainOnly: true })
   deletedAt: Date;
 }
