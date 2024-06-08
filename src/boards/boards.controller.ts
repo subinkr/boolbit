@@ -73,7 +73,7 @@ export class BoardsController {
   @Get()
   @ApiOperation({ summary: 'Get boards' })
   @ApiOkResponse({ type: ResGetBoards })
-  async getBoards(@Query('page', ParseIntPipe) page: number) {
-    return this.boardsService.getBoards(page);
+  async getBoards(@Query('page', ParseIntPipe) page?: number) {
+    return this.boardsService.getBoards(page ?? 1);
   }
 }

@@ -38,7 +38,7 @@ export class BoardsService {
     return { id: newBoard.id };
   }
 
-  async getBoards(page: number = 1): Promise<ResGetBoards> {
+  async getBoards(page: number): Promise<ResGetBoards> {
     const take = 3;
     const skip = take * (page - 1);
 

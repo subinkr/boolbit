@@ -39,7 +39,7 @@ describe('BoardsService', () => {
 
   describe('Get boards', () => {
     it('RUN | getBoards', async () => {
-      await service.getBoards();
+      await service.getBoards(1);
     });
   });
 
