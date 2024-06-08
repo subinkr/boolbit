@@ -43,6 +43,7 @@ export class BoardsService {
     const skip = take * (page - 1);
 
     const findAndCount = await this.boardRepository.findAndCount({
+      order: { id: 'DESC' },
       take,
       skip,
     });
