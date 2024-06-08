@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Query,
   UploadedFile,
@@ -19,6 +20,7 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { ReqPostBoard } from './dto/req-post-board.dto';
 import { AuthId } from 'src/_common/auth/auth.decorator';
@@ -28,6 +30,9 @@ import { BoardModel } from 'src/_core/entities/board.entity';
 import { ResPostBoard } from './dto/res-post-board.dto';
 import { ResGetBoards } from './dto/res-get-boards.dto';
 import { ResGetBoard } from './dto/res-get-board.dto';
+import { ReqEditBoard } from './dto/req-edit-board';
+import { ResEditBoard } from './dto/res-edit-board.dto';
+import { unauthorized } from 'src/_core/error/unauthorized';
 
 @Controller('boards')
 @ApiTags('Boards')
@@ -63,6 +68,13 @@ export class BoardsController {
     return this.boardsService.postBoard(id, reqPostBoard, file);
   }
 
+  @Get()
+  @ApiOperation({ summary: 'Get boards' })
+  @ApiOkResponse({ type: ResGetBoards })
+  async getBoards(@Query('page', ParseIntPipe) page?: number) {
+    return this.boardsService.getBoards(page ?? 1);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get board' })
   @ApiOkResponse({ type: ResGetBoard })
@@ -70,10 +82,36 @@ export class BoardsController {
     return this.boardsService.getBoard(id);
   }
 
-  @Get()
-  @ApiOperation({ summary: 'Get boards' })
-  @ApiOkResponse({ type: ResGetBoards })
-  async getBoards(@Query('page', ParseIntPipe) page?: number) {
-    return this.boardsService.getBoards(page ?? 1);
+  @Patch(':id')
+  @UseGuards(AuthGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiOperation({ summary: 'Edit board' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        content: { type: 'string' },
+        tags: { type: 'string' },
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
+  @ApiOkResponse({ type: ResEditBoard })
+  @ApiUnauthorizedResponse(
+    unauthorized('You are not allowed to edit this board'),
+  )
+  @ApiBearerAuth()
+  async editBoard(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() reqEditBoard: ReqEditBoard,
+    @UploadedFile() file: Express.Multer.File,
+    @AuthId() userId: number,
+  ) {
+    return this.boardsService.editBoard(id, reqEditBoard, file, userId);
   }
 }

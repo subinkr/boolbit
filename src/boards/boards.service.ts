@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BoardModel } from 'src/_core/entities/board.entity';
 import { Repository } from 'typeorm';
@@ -7,6 +11,7 @@ import { UsersService } from 'src/users/users.service';
 import { DataService } from 'src/_common/data/data.service';
 import { ResPostBoard } from './dto/res-post-board.dto';
 import { ResGetBoards } from './dto/res-get-boards.dto';
+import { ReqEditBoard } from './dto/req-edit-board';
 
 @Injectable()
 export class BoardsService {
@@ -64,5 +69,24 @@ export class BoardsService {
     }
 
     return board;
+  }
+
+  async editBoard(
+    id: number,
+    reqEditBoard: ReqEditBoard,
+    file: Express.Multer.File,
+    userId: number,
+  ) {
+    const board = await this.getBoard(id);
+
+    if (board.user.id !== userId) {
+      throw new UnauthorizedException('You are not allowed to edit this board');
+    }
+
+    const image = file ? await this.dataService.uploadImage(file) : board.image;
+
+    await this.boardRepository.save({ id, ...reqEditBoard, image });
+
+    return { message: 'Board updated successfully' };
   }
 }

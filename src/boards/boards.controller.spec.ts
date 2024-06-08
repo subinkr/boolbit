@@ -46,4 +46,17 @@ describe('BoardsController', () => {
       expect(service.getBoard).toHaveBeenCalled();
     });
   });
+
+  describe('Edit board', () => {
+    it('USE | editBoard', async () => {
+      service.editBoard = jest.fn();
+      await controller.editBoard(
+        defaultUser.id,
+        mockReqPostBoard,
+        emptyFile,
+        defaultUser.id,
+      );
+      expect(service.editBoard).toHaveBeenCalled();
+    });
+  });
 });
