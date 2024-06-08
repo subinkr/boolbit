@@ -39,7 +39,7 @@ export class BoardsService {
   }
 
   async getBoards(page: number = 1): Promise<ResGetBoards> {
-    const take = 5;
+    const take = 3;
     const skip = take * (page - 1);
 
     const findAndCount = await this.boardRepository.findAndCount({
@@ -49,7 +49,7 @@ export class BoardsService {
 
     const { array: boards, totalPages } = this.dataService.pagination(
       findAndCount,
-      skip,
+      take,
     );
 
     return { boards, totalPages };
