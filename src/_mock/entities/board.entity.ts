@@ -56,4 +56,8 @@ export class MockBoardModel {
   save() {
     return MockBoardModel.defaultBoard;
   }
+
+  softDelete() {
+    return true;
+  }
 }

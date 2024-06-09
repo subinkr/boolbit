@@ -4,7 +4,7 @@ import { ResPagination } from './dto/res-pagination.dto';
 @Injectable()
 export class DataService {
   async uploadImage(file: Express.Multer.File): Promise<string> {
-    return `${process.env.HOST}/public/image/${file.filename}`;
+    return `/public/image/${file.filename}`;
   }
 
   pagination<T>(findAndCount: [T[], number], take: number): ResPagination<T> {

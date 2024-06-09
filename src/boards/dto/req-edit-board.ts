@@ -11,7 +11,4 @@ export class ReqEditBoard {
   @IsNotEmpty()
   @IsString()
   content: string;
-
-  @ApiProperty({ example: '#5km #오운완' })
-  tags?: string;
 }

@@ -11,7 +11,4 @@ export class ReqPostBoard {
   @IsNotEmpty()
   @IsString()
   content: string;
-
-  @ApiProperty({ example: '#5km #오운완' })
-  tags?: string;
 }
