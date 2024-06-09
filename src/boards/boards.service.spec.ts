@@ -86,4 +86,17 @@ describe('BoardsService', () => {
       expect(result).rejects.toThrow(UnauthorizedException);
     });
   });
+
+  describe('Delete board', () => {
+    it('USE | getBoard', async () => {
+      service.getBoard = jest.fn().mockReturnValue(responseBoard);
+      await service.deleteBoard(defaultBoard.id, defaultUser.id);
+      expect(service.getBoard).toHaveBeenCalled();
+    });
+
+    it('ERR | You are not allowed to delete this board', async () => {
+      const result = service.deleteBoard(defaultBoard.id, 0);
+      expect(result).rejects.toThrow(UnauthorizedException);
+    });
+  });
 });

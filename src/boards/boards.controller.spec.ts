@@ -59,4 +59,12 @@ describe('BoardsController', () => {
       expect(service.editBoard).toHaveBeenCalled();
     });
   });
+
+  describe('Delete board', () => {
+    it('USE | deleteBoard', async () => {
+      service.deleteBoard = jest.fn();
+      await controller.deleteBoard(defaultUser.id, defaultUser.id);
+      expect(service.deleteBoard).toHaveBeenCalled();
+    });
+  });
 });

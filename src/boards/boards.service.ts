@@ -44,7 +44,7 @@ export class BoardsService {
   }
 
   async getBoards(page: number): Promise<ResGetBoards> {
-    const take = 3;
+    const take = 10;
     const skip = take * (page - 1);
 
     const findAndCount = await this.boardRepository.findAndCount({
@@ -88,5 +88,19 @@ export class BoardsService {
     await this.boardRepository.save({ id, ...reqEditBoard, image });
 
     return { message: 'Board updated successfully' };
+  }
+
+  async deleteBoard(id: number, userId: number) {
+    const board = await this.getBoard(id);
+
+    if (board.user.id !== userId) {
+      throw new UnauthorizedException(
+        'You are not allowed to delete this board',
+      );
+    }
+
+    await this.boardRepository.softDelete(board.id);
+
+    return { message: 'Board deleted successfully' };
   }
 }

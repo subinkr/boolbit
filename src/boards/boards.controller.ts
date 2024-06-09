@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -33,6 +34,7 @@ import { ResGetBoard } from './dto/res-get-board.dto';
 import { ReqEditBoard } from './dto/req-edit-board';
 import { ResEditBoard } from './dto/res-edit-board.dto';
 import { unauthorized } from 'src/_core/error/unauthorized';
+import { ResDeleteBoard } from './dto/res-delete-board';
 
 @Controller('boards')
 @ApiTags('Boards')
@@ -50,7 +52,6 @@ export class BoardsController {
       properties: {
         title: { type: 'string' },
         content: { type: 'string' },
-        tags: { type: 'string' },
         file: {
           type: 'string',
           format: 'binary',
@@ -93,7 +94,6 @@ export class BoardsController {
       properties: {
         title: { type: 'string' },
         content: { type: 'string' },
-        tags: { type: 'string' },
         file: {
           type: 'string',
           format: 'binary',
@@ -113,5 +113,20 @@ export class BoardsController {
     @AuthId() userId: number,
   ) {
     return this.boardsService.editBoard(id, reqEditBoard, file, userId);
+  }
+
+  @Delete(':id')
+  @UseGuards(AuthGuard)
+  @ApiOperation({ summary: 'Delete board' })
+  @ApiOkResponse({ type: ResDeleteBoard })
+  @ApiUnauthorizedResponse(
+    unauthorized('You are not allowed to delete this board'),
+  )
+  @ApiBearerAuth()
+  async deleteBoard(
+    @Param('id', ParseIntPipe) id: number,
+    @AuthId() userId: number,
+  ) {
+    return this.boardsService.deleteBoard(id, userId);
   }
 }
