@@ -1,6 +1,4 @@
 import { ClassSerializerInterceptor, Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserModel } from './_core/entities/user.entity';
@@ -60,9 +58,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
       serveRoot: '/public',
     }),
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
     { provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
   ],
 })

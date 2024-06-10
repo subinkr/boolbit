@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BoardModel } from 'src/_core/entities/board.entity';
 import { Repository } from 'typeorm';
@@ -7,6 +11,7 @@ import { UsersService } from 'src/users/users.service';
 import { DataService } from 'src/_common/data/data.service';
 import { ResPostBoard } from './dto/res-post-board.dto';
 import { ResGetBoards } from './dto/res-get-boards.dto';
+import { ReqEditBoard } from './dto/req-edit-board';
 
 @Injectable()
 export class BoardsService {
@@ -38,18 +43,19 @@ export class BoardsService {
     return { id: newBoard.id };
   }
 
-  async getBoards(page: number = 1): Promise<ResGetBoards> {
-    const take = 5;
+  async getBoards(page: number): Promise<ResGetBoards> {
+    const take = 10;
     const skip = take * (page - 1);
 
     const findAndCount = await this.boardRepository.findAndCount({
+      order: { id: 'DESC' },
       take,
       skip,
     });
 
     const { array: boards, totalPages } = this.dataService.pagination(
       findAndCount,
-      skip,
+      take,
     );
 
     return { boards, totalPages };
@@ -63,5 +69,38 @@ export class BoardsService {
     }
 
     return board;
+  }
+
+  async editBoard(
+    id: number,
+    reqEditBoard: ReqEditBoard,
+    file: Express.Multer.File,
+    userId: number,
+  ) {
+    const board = await this.getBoard(id);
+
+    if (board.user.id !== userId) {
+      throw new UnauthorizedException('You are not allowed to edit this board');
+    }
+
+    const image = file ? await this.dataService.uploadImage(file) : board.image;
+
+    await this.boardRepository.save({ id, ...reqEditBoard, image });
+
+    return { message: 'Board updated successfully' };
+  }
+
+  async deleteBoard(id: number, userId: number) {
+    const board = await this.getBoard(id);
+
+    if (board.user.id !== userId) {
+      throw new UnauthorizedException(
+        'You are not allowed to delete this board',
+      );
+    }
+
+    await this.boardRepository.softDelete(board.id);
+
+    return { message: 'Board deleted successfully' };
   }
 }

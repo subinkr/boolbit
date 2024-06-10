@@ -11,7 +11,7 @@ describe('BoardsController', () => {
   let controller: BoardsController;
   let service: BoardsService;
   const { defaultUser } = MockUserModel;
-  const { defaultBoard } = MockBoardModel;
+  const { responseBoard } = MockBoardModel;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -24,18 +24,47 @@ describe('BoardsController', () => {
   });
 
   describe('Post board', () => {
-    it('USE | Post board', async () => {
-      service.postBoard = jest.fn().mockReturnValue(defaultBoard.id);
+    it('USE | postBoard', async () => {
+      service.postBoard = jest.fn().mockReturnValue(responseBoard.id);
       await controller.postBoard(defaultUser.id, mockReqPostBoard, emptyFile);
       expect(service.postBoard).toHaveBeenCalled();
     });
   });
 
+  describe('Get boards', () => {
+    it('USE | getBoards', async () => {
+      service.getBoards = jest.fn().mockReturnValue([[responseBoard], 1]);
+      await controller.getBoards();
+      expect(service.getBoards).toHaveBeenCalled();
+    });
+  });
+
   describe('Get board', () => {
-    it('USE | Get board', async () => {
-      service.getBoard = jest.fn().mockReturnValue(defaultBoard);
+    it('USE | getBoard', async () => {
+      service.getBoard = jest.fn().mockReturnValue(responseBoard);
       await controller.getBoard(defaultUser.id);
       expect(service.getBoard).toHaveBeenCalled();
+    });
+  });
+
+  describe('Edit board', () => {
+    it('USE | editBoard', async () => {
+      service.editBoard = jest.fn();
+      await controller.editBoard(
+        defaultUser.id,
+        mockReqPostBoard,
+        emptyFile,
+        defaultUser.id,
+      );
+      expect(service.editBoard).toHaveBeenCalled();
+    });
+  });
+
+  describe('Delete board', () => {
+    it('USE | deleteBoard', async () => {
+      service.deleteBoard = jest.fn();
+      await controller.deleteBoard(defaultUser.id, defaultUser.id);
+      expect(service.deleteBoard).toHaveBeenCalled();
     });
   });
 });
