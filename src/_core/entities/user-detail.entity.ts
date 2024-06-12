@@ -98,8 +98,8 @@ export class UserDetailModel extends BaseModel {
   steps: number;
 
   @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.distance_walking_running,
+    example: MockUserDetailModel.defaultDetail.active_energy_burned,
   })
   @Column({ default: 0 })
-  distance_walking_running: number;
+  active_energy_burned: number;
 }

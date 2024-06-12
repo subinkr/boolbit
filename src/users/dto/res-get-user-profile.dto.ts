@@ -59,9 +59,9 @@ export class ResGetUserProfile {
   @ApiProperty({ example: MockUserDetailModel.defaultDetail.steps })
   steps: number;
   @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.distance_walking_running,
+    example: MockUserDetailModel.defaultDetail.active_energy_burned,
   })
-  distance_walking_running: number;
+  active_energy_burned: number;
 
   @ApiProperty({ example: [] })
   skillList: SkillModel[];
