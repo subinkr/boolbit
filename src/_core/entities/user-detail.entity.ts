@@ -102,4 +102,10 @@ export class UserDetailModel extends BaseModel {
   })
   @Column({ default: 0 })
   active_energy_burned: number;
+
+  @ApiProperty({
+    example: MockUserDetailModel.defaultDetail.water,
+  })
+  @Column({ default: 0 })
+  water: number;
 }

@@ -62,6 +62,10 @@ export class ResGetUserProfile {
     example: MockUserDetailModel.defaultDetail.active_energy_burned,
   })
   active_energy_burned: number;
+  @ApiProperty({
+    example: MockUserDetailModel.defaultDetail.water,
+  })
+  water: number;
 
   @ApiProperty({ example: [] })
   skillList: SkillModel[];

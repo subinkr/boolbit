@@ -59,6 +59,7 @@ export class UsersService {
 
       steps: detail.steps,
       active_energy_burned: detail.active_energy_burned,
+      water: detail.water,
 
       skillList: await user.skillList,
       lectureList: await user.lectureList,

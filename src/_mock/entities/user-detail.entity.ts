@@ -30,6 +30,7 @@ export class MockUserDetailModel {
 
     steps: 0,
     active_energy_burned: 0,
+    water: 0,
   };
 
   static detailList = [this.defaultDetail];
