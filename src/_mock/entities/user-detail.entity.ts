@@ -11,12 +11,6 @@ export class MockUserDetailModel {
 
     titleColor: '0xFFFFFFFF',
 
-    strengthLevel: 1,
-    agilityLevel: 1,
-    staminaLevel: 1,
-    intellectLevel: 1,
-    wisdomLevel: 1,
-
     strengthExp: 0,
     agilityExp: 0,
     staminaExp: 0,

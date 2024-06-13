@@ -25,17 +25,6 @@ export class ResGetUserProfile {
   @ApiProperty({ example: MockUserDetailModel.defaultDetail.titleColor })
   titleColor: string;
 
-  @ApiProperty({ example: MockUserDetailModel.defaultDetail.strengthLevel })
-  strengthLevel: number;
-  @ApiProperty({ example: MockUserDetailModel.defaultDetail.agilityLevel })
-  agilityLevel: number;
-  @ApiProperty({ example: MockUserDetailModel.defaultDetail.staminaLevel })
-  staminaLevel: number;
-  @ApiProperty({ example: MockUserDetailModel.defaultDetail.intellectLevel })
-  intellectLevel: number;
-  @ApiProperty({ example: MockUserDetailModel.defaultDetail.wisdomLevel })
-  wisdomLevel: number;
-
   @ApiProperty({ example: MockUserDetailModel.defaultDetail.strengthExp })
   strengthExp: number;
   @ApiProperty({ example: MockUserDetailModel.defaultDetail.agilityExp })

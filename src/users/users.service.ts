@@ -40,12 +40,6 @@ export class UsersService {
       titleName: user.titleName,
       titleColor: detail.titleColor,
 
-      strengthLevel: detail.strengthLevel,
-      agilityLevel: detail.agilityLevel,
-      staminaLevel: detail.staminaLevel,
-      intellectLevel: detail.intellectLevel,
-      wisdomLevel: detail.wisdomLevel,
-
       strengthExp: detail.strengthExp,
       agilityExp: detail.agilityExp,
       staminaExp: detail.staminaExp,

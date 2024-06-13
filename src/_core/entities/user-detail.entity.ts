@@ -16,32 +16,6 @@ export class UserDetailModel extends BaseModel {
   titleColor: string;
 
   @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.strengthLevel,
-  })
-  @Column({ default: 1 })
-  strengthLevel: number;
-  @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.agilityLevel,
-  })
-  @Column({ default: 1 })
-  agilityLevel: number;
-  @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.staminaLevel,
-  })
-  @Column({ default: 1 })
-  staminaLevel: number;
-  @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.intellectLevel,
-  })
-  @Column({ default: 1 })
-  intellectLevel: number;
-  @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.wisdomLevel,
-  })
-  @Column({ default: 1 })
-  wisdomLevel: number;
-
-  @ApiProperty({
     example: MockUserDetailModel.defaultDetail.strengthExp,
   })
   @Column({ default: 0 })
