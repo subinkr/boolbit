@@ -22,9 +22,9 @@ export class MockUserDetailModel {
     skills: 0,
     lectures: 0,
 
-    steps: 0,
     active_energy_burned: 0,
-    water: 0,
+    distance_walking_running: 0,
+    steps: 0,
   };
 
   static detailList = [this.defaultDetail];

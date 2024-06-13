@@ -66,20 +66,20 @@ export class UserDetailModel extends BaseModel {
   lectures: number;
 
   @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.steps,
-  })
-  @Column({ default: 0 })
-  steps: number;
-
-  @ApiProperty({
     example: MockUserDetailModel.defaultDetail.active_energy_burned,
   })
   @Column({ default: 0 })
   active_energy_burned: number;
 
   @ApiProperty({
-    example: MockUserDetailModel.defaultDetail.water,
+    example: MockUserDetailModel.defaultDetail.distance_walking_running,
   })
   @Column({ default: 0 })
-  water: number;
+  distance_walking_running: number;
+
+  @ApiProperty({
+    example: MockUserDetailModel.defaultDetail.steps,
+  })
+  @Column({ default: 0 })
+  steps: number;
 }
