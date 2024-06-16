@@ -1,14 +1,23 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserModel } from 'src/_core/entities/user.entity';
 import { Repository } from 'typeorm';
 import { ResGetUserProfile } from './dto/res-get-user-profile.dto';
+import { DataService } from 'src/_common/data/data.service';
+import { ResPatchUserImage } from './dto/res-patch-user-image.dto';
+import { ReqPatchUserNickname } from './dto/req-patch-user-nickname';
+import { ResPatchUserNickname } from './dto/res-patch-user-nickname.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UserModel)
     private readonly userRepository: Repository<UserModel>,
+    private readonly dataService: DataService,
   ) {}
 
   async getUser(data: number | string): Promise<UserModel> {
@@ -58,5 +67,39 @@ export class UsersService {
       skillList: await user.skillList,
       lectureList: await user.lectureList,
     };
+  }
+
+  async patchUserImage(
+    id: number,
+    userId: number,
+    file: Express.Multer.File,
+  ): Promise<ResPatchUserImage> {
+    if (id !== userId) {
+      throw new UnauthorizedException('Cannot patch other users image');
+    }
+
+    const user = await this.getUser(id);
+
+    const image = file ? await this.dataService.uploadImage(file) : user.image;
+
+    await this.userRepository.save({ ...user, image });
+
+    return { message: 'User image updated successfully' };
+  }
+
+  async patchUserNickname(
+    id: number,
+    userId: number,
+    reqPatchUserNickname: ReqPatchUserNickname,
+  ): Promise<ResPatchUserNickname> {
+    if (id !== userId) {
+      throw new UnauthorizedException('Cannot patch other users nickname');
+    }
+
+    const user = await this.getUser(id);
+
+    await this.userRepository.save({ ...user, ...reqPatchUserNickname });
+
+    return { message: 'User nickname updated successfully' };
   }
 }
