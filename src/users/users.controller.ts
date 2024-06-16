@@ -7,6 +7,7 @@ import {
   Patch,
   UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import {
@@ -27,6 +28,7 @@ import { AuthGuard } from 'src/_common/auth/auth.guard';
 import { AuthId } from 'src/_common/auth/auth.decorator';
 import { ResPatchUserNickname } from './dto/res-patch-user-nickname.dto';
 import { ReqPatchUserNickname } from './dto/req-patch-user-nickname';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('users')
 @ApiTags('Users')
@@ -45,6 +47,7 @@ export class UsersController {
 
   @Patch(':id/image')
   @UseGuards(AuthGuard)
+  @UseInterceptors(FileInterceptor('file'))
   @ApiOperation({ summary: 'Patch users image' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
