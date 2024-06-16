@@ -54,10 +54,10 @@ describe('BoardsService', () => {
     });
   });
 
-  describe('Edit board', () => {
+  describe('Patch board', () => {
     it('USE | getBoard', async () => {
       service.getBoard = jest.fn().mockReturnValue(responseBoard);
-      await service.editBoard(
+      await service.patchBoard(
         defaultBoard.id,
         mockReqPostBoard,
         emptyFile,
@@ -66,8 +66,8 @@ describe('BoardsService', () => {
       expect(service.getBoard).toHaveBeenCalled();
     });
 
-    it('RUN | editBoard', async () => {
-      await service.editBoard(
+    it('RUN | patchBoard', async () => {
+      await service.patchBoard(
         defaultBoard.id,
         mockReqPostBoard,
         null,
@@ -77,7 +77,7 @@ describe('BoardsService', () => {
 
     it('ERR | You are not allowed to edit this board', async () => {
       service.getBoard = jest.fn().mockReturnValue(responseBoard);
-      const result = service.editBoard(
+      const result = service.patchBoard(
         defaultBoard.id,
         mockReqPostBoard,
         emptyFile,

@@ -47,16 +47,16 @@ describe('BoardsController', () => {
     });
   });
 
-  describe('Edit board', () => {
-    it('USE | editBoard', async () => {
-      service.editBoard = jest.fn();
-      await controller.editBoard(
+  describe('Patch board', () => {
+    it('USE | patchBoard', async () => {
+      service.patchBoard = jest.fn();
+      await controller.patchBoard(
         defaultUser.id,
         mockReqPostBoard,
         emptyFile,
         defaultUser.id,
       );
-      expect(service.editBoard).toHaveBeenCalled();
+      expect(service.patchBoard).toHaveBeenCalled();
     });
   });
 

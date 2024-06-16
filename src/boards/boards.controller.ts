@@ -31,8 +31,8 @@ import { BoardModel } from 'src/_core/entities/board.entity';
 import { ResPostBoard } from './dto/res-post-board.dto';
 import { ResGetBoards } from './dto/res-get-boards.dto';
 import { ResGetBoard } from './dto/res-get-board.dto';
-import { ReqEditBoard } from './dto/req-edit-board';
-import { ResEditBoard } from './dto/res-edit-board.dto';
+import { ReqPatchBoard } from './dto/req-patch-board';
+import { ResPatchBoard } from './dto/res-patch-board.dto';
 import { unauthorized } from 'src/_core/error/unauthorized';
 import { ResDeleteBoard } from './dto/res-delete-board';
 
@@ -101,27 +101,23 @@ export class BoardsController {
       },
     },
   })
-  @ApiOkResponse({ type: ResEditBoard })
-  @ApiUnauthorizedResponse(
-    unauthorized('You are not allowed to edit this board'),
-  )
+  @ApiOkResponse({ type: ResPatchBoard })
+  @ApiUnauthorizedResponse(unauthorized('Cannot patch this board'))
   @ApiBearerAuth()
-  async editBoard(
+  async patchBoard(
     @Param('id', ParseIntPipe) id: number,
-    @Body() reqEditBoard: ReqEditBoard,
+    @Body() reqPatchBoard: ReqPatchBoard,
     @UploadedFile() file: Express.Multer.File,
     @AuthId() userId: number,
   ) {
-    return this.boardsService.editBoard(id, reqEditBoard, file, userId);
+    return this.boardsService.patchBoard(id, reqPatchBoard, file, userId);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Delete board' })
   @ApiOkResponse({ type: ResDeleteBoard })
-  @ApiUnauthorizedResponse(
-    unauthorized('You are not allowed to delete this board'),
-  )
+  @ApiUnauthorizedResponse(unauthorized('Cannot delete this board'))
   @ApiBearerAuth()
   async deleteBoard(
     @Param('id', ParseIntPipe) id: number,

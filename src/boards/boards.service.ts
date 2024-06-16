@@ -11,7 +11,7 @@ import { UsersService } from 'src/users/users.service';
 import { DataService } from 'src/_common/data/data.service';
 import { ResPostBoard } from './dto/res-post-board.dto';
 import { ResGetBoards } from './dto/res-get-boards.dto';
-import { ReqEditBoard } from './dto/req-edit-board';
+import { ReqPatchBoard } from './dto/req-patch-board';
 
 @Injectable()
 export class BoardsService {
@@ -71,21 +71,21 @@ export class BoardsService {
     return board;
   }
 
-  async editBoard(
+  async patchBoard(
     id: number,
-    reqEditBoard: ReqEditBoard,
+    reqPatchBoard: ReqPatchBoard,
     file: Express.Multer.File,
     userId: number,
   ) {
     const board = await this.getBoard(id);
 
     if (board.user.id !== userId) {
-      throw new UnauthorizedException('You are not allowed to edit this board');
+      throw new UnauthorizedException('Cannot patch this board');
     }
 
     const image = file ? await this.dataService.uploadImage(file) : board.image;
 
-    await this.boardRepository.save({ id, ...reqEditBoard, image });
+    await this.boardRepository.save({ id, ...reqPatchBoard, image });
 
     return { message: 'Board updated successfully' };
   }
@@ -94,9 +94,7 @@ export class BoardsService {
     const board = await this.getBoard(id);
 
     if (board.user.id !== userId) {
-      throw new UnauthorizedException(
-        'You are not allowed to delete this board',
-      );
+      throw new UnauthorizedException('Cannot delete this board');
     }
 
     await this.boardRepository.softDelete(board.id);
