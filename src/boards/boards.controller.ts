@@ -86,7 +86,7 @@ export class BoardsController {
   @Patch(':id')
   @UseGuards(AuthGuard)
   @UseInterceptors(FileInterceptor('file'))
-  @ApiOperation({ summary: 'Edit board' })
+  @ApiOperation({ summary: 'Patch board' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
